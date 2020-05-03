@@ -36,7 +36,7 @@ from flask import flash, jsonify, render_template, request, redirect, session
 from flask_wtf.csrf import generate_csrf
 from flask_cors import cross_origin
 from expfactory.defaults import EXPFACTORY_LOGS
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 from expfactory.utils import get_post_fields
 
 from expfactory.views.utils import perform_checks, clear_session
