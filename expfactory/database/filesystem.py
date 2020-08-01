@@ -33,6 +33,7 @@ from flask import session
 from expfactory.utils import write_json, mkdir_p
 from expfactory.defaults import EXPFACTORY_SUBID, EXPFACTORY_DATA
 from glob import glob
+from datetime import datetime
 import uuid
 import os
 import sys
@@ -54,7 +55,7 @@ def generate_subid(self, token=None):
 
     # Not headless auto-increments
     if not token:
-        token = str(uuid.uuid4())
+        token = str(uuid.uuid4()).replace('-', '')
 
     # Headless doesn't use any folder_id, just generated token folder
     return "%s/%s" % (self.study_id, token)
@@ -71,10 +72,10 @@ def list_users(self):
 def print_user(self, user):
     """print a filesystem database user. A "database" folder that might end with
        the participant status (e.g. _finished) is extracted to print in format
- 
+
        [folder]                        [identifier][studyid]
        /scif/data/expfactory/xxxx-xxxx   xxxx-xxxx[studyid]
-       
+
     """
     status = "active"
 
@@ -98,9 +99,9 @@ def print_user(self, user):
 
 def generate_user(self, subid=None):
     """generate a new user on the filesystem, still session based so we
-       create a new identifier. This function is called from the users new 
+       create a new identifier. This function is called from the users new
        entrypoint, and it assumes we want a user generated with a token.
-       since we don't have a database proper, we write the folder name to 
+       since we don't have a database proper, we write the folder name to
        the filesystem
     """
     # Only generate token if subid being created
@@ -119,8 +120,8 @@ def generate_user(self, subid=None):
 
 def finish_user(self, subid, ext="finished"):
     """finish user will append "finished" (or other) to the data folder when
-       the user has completed (or been revoked from) the battery. 
-       For headless, this means that the session is ended and the token 
+       the user has completed (or been revoked from) the battery.
+       For headless, this means that the session is ended and the token
        will not work again to rewrite the result. If the user needs to update
        or redo an experiment, this can be done with a new session. Note that if
        this function is called internally by the application at experiment
@@ -158,7 +159,7 @@ def finish_user(self, subid, ext="finished"):
 
 
 def restart_user(self, subid):
-    """restart user will remove any "finished" or "revoked" extensions from 
+    """restart user will remove any "finished" or "revoked" extensions from
     the user folder to restart the session. This command always comes from
     the client users function, so we know subid does not start with the
     study identifer first
@@ -247,7 +248,7 @@ def save_data(self, session, exp_id, content):
 
         # If headless with token pre-generated OR not headless
         if do_save is True:
-            data_file = "%s/%s-results.json" % (data_base, exp_id)
+            data_file = "%s/%s-%s.json" % (data_base, exp_id, str(datetime.now()).replace(' ', '-'))
             if os.path.exists(data_file):
                 self.logger.warning("%s exists, and is being overwritten." % data_file)
             write_json(content, data_file)
@@ -256,7 +257,7 @@ def save_data(self, session, exp_id, content):
 
 
 def init_db(self):
-    """init_db for the filesystem ensures that the base folder (named 
+    """init_db for the filesystem ensures that the base folder (named
        according to the studyid) exists.
     """
     self.session = None

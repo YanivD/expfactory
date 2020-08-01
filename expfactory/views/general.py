@@ -72,6 +72,7 @@ def portal():
             )
             return redirect("/start")
 
+        print(os.getenv('EXPFACTORY_EXPERIMENTS'))
         # Submit but not valid
         return render_template(
             "portal/index.html",
@@ -80,9 +81,10 @@ def portal():
             randomize=app.randomize,
             form=form,
             toggleform=True,
+            EXPFACTORY_EXPERIMENTS=os.getenv('EXPFACTORY_EXPERIMENTS')
         )
 
     # Not submit
     return render_template(
-        "portal/index.html", experiments=app.lookup, base=app.base, form=form
+        "portal/index.html", experiments=app.lookup, base=app.base, form=form, EXPFACTORY_EXPERIMENTS=os.getenv('EXPFACTORY_EXPERIMENTS')
     )

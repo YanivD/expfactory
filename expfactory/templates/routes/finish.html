@@ -2,6 +2,14 @@
 
 {% block content %}
         <div class="row">
+          <style>
+            .modal-content, body {background-color: black;}
+.modal-footer,.modal-header {border:0;}
+.modal-content {
+  text-align: center;
+    color: white;
+}
+          </style>
             <div class="col-md-12">
 
                 <div class="modal fade"
@@ -14,17 +22,22 @@
                      style="margin-top:200px">
                      <div class="modal-dialog modal-lg">
                          <div class="modal-content">
-                             <div class="modal-header">
-                                 <h4 class="js-title-step"></h4>
-                             </div>
 
                          <div class="modal-body" style='padding:20px'>
    
-                         <h2>Great Job {{ session['username'] }}!</h2>
-                         {% include "routes/finish_message.html" %}
-                         <br><br>
-                        </div>
-                        <div class="modal-footer">
+                         <h2>The experiment is completed.
+    <br>
+    <br>
+
+
+Thank you for your participation!
+<br>    <br>
+
+
+You have earned £2 plus a bonus of £<span id="bonus">x</span>.
+
+<br><br><br><a href="https://app.prolific.co/submissions/complete?cc=1FD2773C" target="_blank" style="width: 120px; height:30px; background-color: gray">Finish</a>
+</h2>
                         </div>
                     </div>
                 </div>
@@ -43,6 +56,7 @@
 <script>
 $(document).ready(function(){
     $("#modalToggle").click()
+    $('#bonus').html(localStorage.bonus)
 })
 </script>
 {% endblock %}

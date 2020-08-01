@@ -1,0 +1,89 @@
+button[name=forward]:disabled {visibility:hidden}
+form p.likert:before {
+	opacity: 0.2;
+}
+
+p.likert {
+	color: white;
+	clear: both;
+	border-radius: 5px;
+}
+
+.experiment-container,
+.experiment-content,
+.experiment-main,
+.experiment-ribbon {
+	background-color: black !important;
+}
+
+.mdl-radio__outer-circle {
+	border-color: gray !important;
+	background-color: black;
+}
+
+.mdl-radio__inner-circle {
+	background: gray;
+}
+
+#questions {
+	color: white;
+}
+
+.experiment-content {
+	padding-top: 0;
+}
+
+.experiment-content h3.wizard-header {
+	margin-top: 0;
+}
+
+button {
+	background: lightgray !important;
+	color: black !important;
+}
+
+button:disabled {
+	background: lightgray !important;
+	color: gray !important;
+}
+
+.pad {
+	display: none;
+}
+
+.navigation {
+	float: left;
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+    form p.likert:before {
+        width: 12cm;
+    }
+    h3{
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: -70px;
+    }
+    .mdl-radio{
+        font-size:14px;
+    }
+    .clearfix{
+        float: right;
+      }
+    .backward{
+        visibility: hidden;
+      }
+    .submit{
+        visibility: hidden;
+        }
+    p.likert{
+        font-weight: normal;
+        font-size: 15px;
+    }

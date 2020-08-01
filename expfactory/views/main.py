@@ -78,7 +78,7 @@ def experiment_base():
 
 
 # Home portal to start experiments
-@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 def home():
 
     # A headless app can only be entered with a user token
@@ -93,6 +93,10 @@ def home():
 
     return portal()
 
+# Home portal to start experiments
+@app.route("/", methods=["GET", "POST"])
+def fullscreen():
+    return render_template("routes/fullscreen.html")
 
 # EXPERIMENT ROUTER ############################################################
 

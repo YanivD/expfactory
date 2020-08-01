@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+    <head>
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>The Experiment Factory</title>
+
+        <link rel="icon" type="image/png" href="{{ url_for('static',filename='img/favicon.ico') }}">
+        <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet" />
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+    
+        <link href='https://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+    </head>
+    <body style="height: 100%; background-color: black; text-align: center">  
+    	<button id="view-fullscreen" style="margin-top: 60px;padding: 20px;">Enter experiment</button>
+
+      <iframe style="width: 100%; height: 100%;display: none" id="iframe_wrapper" src="/home"></iframe>
+<script type="text/javascript">
+	    function requestFullScreen(element) {
+    // Supports most browsers and their versions.
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+    if (requestMethod) { // Native full screen.
+        requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+        }
+    }
+}
+
+var elem = document.getElementById('iframe_wrapper'); // Make the body go full screen.
+var viewFullScreen = document.getElementById("view-fullscreen");
+if (viewFullScreen) {
+  viewFullScreen.addEventListener("click", function() {
+  	elem.style.display = 'block'
+  	viewFullScreen.style.display = 'none'
+    var docElm = document.documentElement;
+    if (docElm.requestFullscreen) {
+      docElm.requestFullscreen();
+    } else if (docElm.msRequestFullscreen) {
+      docElm.msRequestFullscreen();
+    } else if (docElm.mozRequestFullScreen) {
+      docElm.mozRequestFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+      docElm.webkitRequestFullScreen();
+    }
+  })
+}
+
+if (document.addEventListener)
+{
+ document.addEventListener('fullscreenchange', exitHandler, false);
+ document.addEventListener('mozfullscreenchange', exitHandler, false);
+ document.addEventListener('MSFullscreenChange', exitHandler, false);
+ document.addEventListener('webkitfullscreenchange', exitHandler, false);
+}
+
+function exitHandler(e)
+{
+  setTimeout(function() {
+
+ if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null)
+ {
+if (!(window.innerWidth == screen.width && window.innerHeight == screen.height)){
+alert('The experiment has been terminated, and you are being redirected to Prolific. Sorry to see you leave...')
+window.location.href = "https://www.prolific.co/";
+    }
+}
+  }, 150);
+ }
+
+const urlParams = new URLSearchParams(window.location.search);
+const PROLIFIC_PID = urlParams.get('PROLIFIC_PID');
+
+if (PROLIFIC_PID) {
+	localStorage['URL_PROLIFIC_PID'] = PROLIFIC_PID;
+}
+
+</script>
+</body></html>

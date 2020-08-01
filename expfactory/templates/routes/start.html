@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <div class="row">
+<style>
+    body {
+        background: black;
+    }
+</style>
+        <div class="row" style="visibility: hidden">
             <div class="col-md-12">
 
                 <div class="modal fade"
                      id="instructions_modal"
-                     tabindex="-1" 
-                     data-backdrop="static" 
-                     role="dialog" 
-                     aria-labelledby="instructions_modal_label" 
+                     tabindex="-1"
+                     data-backdrop="static"
+                     role="dialog"
+                     aria-labelledby="instructions_modal_label"
                      aria-hidden="false"
                      style="margin-top:200px">
                      <div class="modal-dialog modal-lg">
@@ -19,25 +24,25 @@
                              </div>
 
                          <div class="modal-body" style='padding:20px'>
-   
+
                          <h2>Welcome {{ session['username'] }}!</h2>
                          {% include "routes/start_message.html" %}
                          <br><br>
-                         <a href="/finish"><button id="disagree_button" 
-                                                   type="button" 
+                         <a href="/finish"><button id="disagree_button"
+                                                   type="button"
                                                    class="btn btn-default">Disagree</button></a>
                         </div>
                         <div class="modal-footer">
-                             <a href="/next"><button type="button" 
-                                id="next_button" 
-                                class="btn btn-default js-btn-step" 
+                             <a href="/next"><button type="button"
+                                id="next_button"
+                                class="btn btn-default js-btn-step"
                                 data-orientation="next">Start</button></a>
                  </div>
              </div>
          </div>
      </div>
 
-     <button type="button" 
+     <button type="button"
              id="modalToggle"
              class="btn btn-primary btn-lg hidden"
              data-toggle="modal"
@@ -49,7 +54,27 @@
 {% block scripts %}
 <script>
 $(document).ready(function(){
+    function requestFullScreen(element) {
+    // Supports most browsers and their versions.
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+    if (requestMethod) { // Native full screen.
+        requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+        }
+    }
+}
+
+// var elem = document.body; // Make the body go full screen.
+// requestFullScreen(elem);
+
     $("#modalToggle").click()
+    $("#next_button").click()
+
 })
 </script>
 {% endblock %}
+

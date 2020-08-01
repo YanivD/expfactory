@@ -1,0 +1,101 @@
+button[name=forward]:disabled {visibility:hidden}
+form p.likert:before { 
+            display: none;
+         }
+
+        .mdl-radio.is-upgraded {
+            float: left;
+            clear: both;
+            text-align: left;
+        }
+
+        .mdl-radio__label {
+
+    margin-left: 57%;
+    padding-top: 0;
+    width: 100%;
+    text-align: left;
+        } 
+        .mdl-radio {
+            width: 50%;
+        }
+
+        p.likert {
+            color: white;
+            clear: both;
+            border-radius: 5px;
+            background-color: gray;
+            padding: 5px 10px;
+            float: left;
+            width:100%;
+            margin-top: 15px;
+        }
+
+        h3 { 
+            font-size: 14px;
+            float: left;
+            clear: both;
+     }
+
+.experiment-container, .experiment-content, .experiment-main, .experiment-ribbon {
+    background-color: black !important;
+}
+
+.mdl-radio__outer-circle {
+    border-color: gray !important;
+    background-color: black;
+}
+.mdl-radio__inner-circle {
+    background: gray;
+}
+
+#questions {
+    color: white;
+}
+.experiment-content {
+    padding-top: 0;
+}
+
+.experiment-content h3.wizard-header {
+    margin-top: 0;
+}
+button {
+    background: lightgray !important;
+    color: black !important;
+}
+button:disabled {
+    background: lightgray !important;
+    color: gray !important;
+}
+.pad {
+    display: none;
+}
+
+.navigation {
+    float: left;
+    width: 100%;
+}
+
+
+
+
+
+   .mdl-radio{
+            font-size: 14px;
+        }
+        h3{
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .clearfix{
+          float: right;
+      }
+      .backward{
+          visibility: hidden;
+      }
+        .submit{
+            visibility: hidden;
+        }
+        p.likert:before { 
+            display: None;
+         }
